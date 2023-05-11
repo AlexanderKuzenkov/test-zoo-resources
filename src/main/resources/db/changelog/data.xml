@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="Init animals" author="Kuzenkov">
+        <insert tableName="animal">
+            <column name="name" value="Обезьяна"/>
+            <column name="species" value="Млекопитающее"/>
+            <column name="carnivorous" value="false"/>
+        </insert>
+        <insert tableName="animal">
+            <column name="name" value="Заяц"/>
+            <column name="species" value="Млекопитающее"/>
+            <column name="carnivorous" value="false"/>
+        </insert>
+        <insert tableName="animal">
+            <column name="name" value="Орёл"/>
+            <column name="species" value="Птица"/>
+            <column name="carnivorous" value="true"/>
+        </insert>
+        <insert tableName="animal">
+            <column name="name" value="Тигр"/>
+            <column name="species" value="Млекопитающее"/>
+            <column name="carnivorous" value="true"/>
+        </insert>
+        <insert tableName="animal">
+            <column name="name" value="Лошадь"/>
+            <column name="species" value="Млекопитающее"/>
+            <column name="carnivorous" value="false"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="Init food" author="Kuzenkov">
+        <insert tableName="food">
+            <column name="name" value="Морковь"/>
+            <column name="count" value="12"/>
+            <column name="unit" value="шт"/>
+            <column name="type" value="Овощ"/>
+        </insert>
+        <insert tableName="food">
+            <column name="name" value="Мясо"/>
+            <column name="count" value="5"/>
+            <column name="unit" value="кг"/>
+            <column name="type" value="Мясо"/>
+        </insert>
+        <insert tableName="food">
+            <column name="name" value="Капуста"/>
+            <column name="count" value="15"/>
+            <column name="unit" value="шт"/>
+            <column name="type" value="Овощ"/>
+        </insert>
+        <insert tableName="food">
+            <column name="name" value="Банан"/>
+            <column name="count" value="6"/>
+            <column name="unit" value="шт"/>
+            <column name="type" value="Фрукт"/>
+        </insert>
+        <insert tableName="food">
+            <column name="name" value="Яблоко"/>
+            <column name="count" value="0"/>
+            <column name="unit" value="шт"/>
+            <column name="type" value="Фрукт"/>
+        </insert>
+        <insert tableName="food">
+            <column name="name" value="Зерно"/>
+            <column name="count" value="55"/>
+            <column name="unit" value="кг"/>
+            <column name="type" value="Зерно"/>
+        </insert>
+        <insert tableName="food">
+            <column name="name" value="Вода"/>
+            <column name="count" value="100"/>
+            <column name="unit" value="л"/>
+            <column name="type" value="Жидкость"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="Init feeding" author="Kuzenkov">
+        <insert tableName="feeding_schedule">
+            <column name="animal_id" value="1"/>
+            <column name="food_id" value="4"/>
+            <column name="feeding_time" value="2023-05-11"/>
+            <column name="quantity" value="3"/>
+        </insert>
+        <insert tableName="feeding_schedule">
+            <column name="animal_id" value="1"/>
+            <column name="food_id" value="5"/>
+            <column name="feeding_time" value="2023-05-11"/>
+            <column name="quantity" value="4"/>
+        </insert>
+        <insert tableName="feeding_schedule">
+            <column name="animal_id" value="1"/>
+            <column name="food_id" value="7"/>
+            <column name="feeding_time" value="2023-05-11"/>
+            <column name="quantity" value="5"/>
+        </insert>
+        <insert tableName="feeding_schedule">
+            <column name="animal_id" value="2"/>
+            <column name="food_id" value="1"/>
+            <column name="feeding_time" value="2023-05-11"/>
+            <column name="quantity" value="5"/>
+        </insert>
+        <insert tableName="feeding_schedule">
+            <column name="animal_id" value="2"/>
+            <column name="food_id" value="3"/>
+            <column name="feeding_time" value="2023-05-11"/>
+            <column name="quantity" value="2"/>
+        </insert>
+        <insert tableName="feeding_schedule">
+            <column name="animal_id" value="2"/>
+            <column name="food_id" value="7"/>
+            <column name="feeding_time" value="2023-05-11"/>
+            <column name="quantity" value="5"/>
+        </insert>
+        <insert tableName="feeding_schedule">
+            <column name="animal_id" value="3"/>
+            <column name="food_id" value="2"/>
+            <column name="feeding_time" value="2023-05-11"/>
+            <column name="quantity" value="2"/>
+        </insert>
+        <insert tableName="feeding_schedule">
+            <column name="animal_id" value="3"/>
+            <column name="food_id" value="6"/>
+            <column name="feeding_time" value="2023-05-11"/>
+            <column name="quantity" value="2"/>
+        </insert>
+        <insert tableName="feeding_schedule">
+            <column name="animal_id" value="3"/>
+            <column name="food_id" value="7"/>
+            <column name="feeding_time" value="2023-05-11"/>
+            <column name="quantity" value="3"/>
+        </insert>
+        <insert tableName="feeding_schedule">
+            <column name="animal_id" value="4"/>
+            <column name="food_id" value="2"/>
+            <column name="feeding_time" value="2023-05-11"/>
+            <column name="quantity" value="6"/>
+        </insert>
+        <insert tableName="feeding_schedule">
+            <column name="animal_id" value="4"/>
+            <column name="food_id" value="7"/>
+            <column name="feeding_time" value="2023-05-11"/>
+            <column name="quantity" value="5"/>
+        </insert>
+        <insert tableName="feeding_schedule">
+            <column name="animal_id" value="5"/>
+            <column name="food_id" value="6"/>
+            <column name="feeding_time" value="2023-05-11"/>
+            <column name="quantity" value="10"/>
+        </insert>
+        <insert tableName="feeding_schedule">
+            <column name="animal_id" value="5"/>
+            <column name="food_id" value="7"/>
+            <column name="feeding_time" value="2023-05-11"/>
+            <column name="quantity" value="10"/>
+        </insert>
+        <insert tableName="feeding_schedule">
+            <column name="animal_id" value="5"/>
+            <column name="food_id" value="5"/>
+            <column name="feeding_time" value="2023-05-11"/>
+            <column name="quantity" value="3"/>
+        </insert>
+        <insert tableName="feeding_schedule">
+            <column name="animal_id" value="5"/>
+            <column name="food_id" value="1"/>
+            <column name="feeding_time" value="2023-05-11"/>
+            <column name="quantity" value="5"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

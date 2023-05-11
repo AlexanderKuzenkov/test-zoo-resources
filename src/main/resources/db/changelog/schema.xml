@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="Create table animal" author="Kuzenkov">
+
+        <createTable tableName="animal">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)"/>
+            <column name="species" type="varchar(50)"/>
+            <column name="carnivorous" type="varchar(50)"/>
+        </createTable>
+
+    </changeSet>
+
+    <changeSet id="Create table food" author="Kuzenkov">
+
+        <createTable tableName="food">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)"/>
+            <column name="count" type="bigint"/>
+            <column name="unit" type="varchar(50)"/>
+            <column name="type" type="varchar(50)"/>
+        </createTable>
+
+    </changeSet>
+
+    <changeSet id="Create table feeding_schedule" author="Kuzenkov">
+
+        <createTable tableName="feeding_schedule">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="animal_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_animal_id" references="animal(id)"/>
+            </column>
+            <column name="food_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_food_id" references="food(id)"/>
+            </column>
+            <column name="feeding_time" type="date"/>
+            <column name="quantity" type="bigint"/>
+        </createTable>
+
+    </changeSet>
+</databaseChangeLog>

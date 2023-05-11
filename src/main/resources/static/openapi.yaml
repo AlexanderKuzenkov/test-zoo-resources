@@ -1,0 +1,809 @@
+openapi: 3.0.3
+info:
+  title: Zoo Resources REST API
+  description: Zoo Resources REST API
+  version: 0.0.1
+
+servers:
+  - url: /api/v1
+
+paths:
+  /animal:
+    post:
+      tags:
+        - Animal
+      summary: Добавление нового животного
+      requestBody:
+        description: Данные нового животного
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnimalCreate'
+      responses:
+        200:
+          description: Метод успешно отработал
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  animal-id:
+                    type: integer
+                    format: int64
+                    description: Идентификатор созданного животного
+                    example: 5
+        400:
+          $ref: '#/components/responses/400Error'
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        500:
+          $ref: '#/components/responses/500Error'
+
+  /animal/{animal-id}:
+    parameters:
+      - name: animal-id
+        in: path
+        description: Идентификатор животного
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 5
+    get:
+      tags:
+        - Animal
+      summary: получение данных о животном по его id
+      responses:
+        200:
+          description: Метод успешно отработал
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Animal'
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        500:
+          $ref: '#/components/responses/500Error'
+    put:
+      tags:
+        - Animal
+      summary: изменение информации о животном по его id
+      requestBody:
+        description: Данные нового животного
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnimalPut'
+      responses:
+        200:
+          description: Метод успешно отработал
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        500:
+          $ref: '#/components/responses/500Error'
+    delete:
+      tags:
+        - Animal
+      summary: удаление животного по id
+      responses:
+        200:
+          description: Метод успешно отработал
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        500:
+          $ref: '#/components/responses/500Error'
+
+  /animal/batch-delete:
+    post:
+      tags:
+        - Animal
+      summary: массовое удаление животных по id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#components/schemas/AnimalDeleteRequest'
+      responses:
+        200:
+          description: Метод успешно отработал
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        500:
+          $ref: '#/components/responses/500Error'
+
+  /animal/{animal-id}/feeding:
+    parameters:
+      - name: animal-id
+        in: path
+        description: Идентификатор животного
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 5
+    get:
+      tags:
+        - Animal
+        - Feeding
+      summary: получение информации о питании животного по его id
+      responses:
+        200:
+          description: Метод успешно отработал
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnimalFeeding'
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        500:
+          $ref: '#/components/responses/500Error'
+
+  /animal/list:
+    get:
+      tags:
+        - Animal
+      summary: получение списка всех животных
+      responses:
+        200:
+          description: Метод успешно отработал
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnimalList'
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        500:
+          $ref: '#/components/responses/500Error'
+
+  /food:
+    post:
+      tags:
+        - Food
+      summary: Добавление нового продукта
+      requestBody:
+        description: Данные нового продукта
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FoodCreate'
+      responses:
+        200:
+          description: Метод успешно отработал
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  food-id:
+                    type: integer
+                    format: int64
+                    description: Идентификатор созданного продукта
+                    example: 5
+        400:
+          $ref: '#/components/responses/400Error'
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        409:
+          $ref: '#/components/responses/409Error'
+        500:
+          $ref: '#/components/responses/500Error'
+
+  /food/{food-id}:
+    parameters:
+      - name: food-id
+        in: path
+        description: Идентификатор продукта
+        required: true
+        schema:
+          type: integer
+          format: int64
+          example: 5
+    get:
+      tags:
+        - Food
+      summary: получение данных о продукте по его id
+      responses:
+        200:
+          description: Метод успешно отработал
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Food'
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        500:
+          $ref: '#/components/responses/500Error'
+    put:
+      tags:
+        - Food
+      summary: изменение информации о продукте по его id
+      requestBody:
+        description: Данные нового животного
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FoodPut'
+      responses:
+        200:
+          description: Метод успешно отработал
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        500:
+          $ref: '#/components/responses/500Error'
+    delete:
+      tags:
+        - Food
+      summary: удаление продукта по id
+      responses:
+        200:
+          description: Метод успешно отработал
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        500:
+          $ref: '#/components/responses/500Error'
+
+  /food/batch-delete:
+    post:
+      tags:
+        - Food
+      summary: массовое удаление продуктов
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#components/schemas/FoodDeleteRequest'
+      responses:
+        200:
+          description: Метод успешно отработал
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        500:
+          $ref: '#/components/responses/500Error'
+
+  /food/list:
+    get:
+      tags:
+        - Food
+      summary: получение списка всех продуктов
+      responses:
+        200:
+          description: Метод успешно отработал
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FoodList'
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        500:
+          $ref: '#/components/responses/500Error'
+
+  /feeding:
+    post:
+      tags:
+        - Feeding
+      summary: Добавление в расписание новой записи
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeedingCreate'
+      responses:
+        200:
+          description: Метод успешно отработал
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  food-id:
+                    type: integer
+                    format: int64
+                    description: Идентификатор созданного продукта
+                    example: 5
+        400:
+          $ref: '#/components/responses/400Error'
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        500:
+          $ref: '#/components/responses/500Error'
+
+  /feeding/batch-update:
+    post:
+      tags:
+        - Feeding
+      summary: Добавление в расписание новой записи
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeedingBatch'
+      responses:
+        200:
+          description: Метод успешно отработал
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  food-id:
+                    type: integer
+                    format: int64
+                    description: Идентификатор созданного продукта
+                    example: 5
+        400:
+          $ref: '#/components/responses/400Error'
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        500:
+          $ref: '#/components/responses/500Error'
+
+  /feeding/list:
+    get:
+      tags:
+        - Feeding
+      summary: Возвращает информацию о питании с текущей даты на заданное количество дней
+      parameters:
+        - name: days
+          in: query
+          description: Количество дней
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Метод успешно отработал
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeedingList'
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        500:
+          $ref: '#/components/responses/500Error'
+
+
+  /feeding/clone-schedule:
+    post:
+      tags:
+        - Feeding
+      summary: Клонирует записи о питании с текущего дня на заданное количество
+      parameters:
+        - name: days
+          in: query
+          description: Количество дней
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Метод успешно отработал
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        500:
+          $ref: '#/components/responses/500Error'
+
+
+components:
+  responses:
+    400Error:
+      description: 'Ошибочный запрос, например, отсутствует один из параметров'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    401Error:
+      description: Ошибка аутентификации
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    403Error:
+      description: Недостаточно прав для выполнения запроса
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    404Error:
+      description: Запрашиваемый ресурс не найден
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    500Error:
+      description: Серверная ошибка
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    AnimalCreate:
+      type: object
+      properties:
+        name:
+          description: Название животного
+          type: string
+          example: Заяц
+        species:
+          description: Вид животного
+          type: string
+          example: Млекопитающее
+        isCarnivorous:
+          description: Признак хищника
+          type: boolean
+          example: false
+
+    AnimalPut:
+      type: object
+      properties:
+        name:
+          description: Название животного
+          type: string
+          example: Заяц
+        species:
+          description: Вид животного
+          type: string
+          example: Млекопитающее
+        isCarnivorous:
+          description: Признак хищника
+          type: boolean
+          example: false
+
+    AnimalDeleteRequest:
+      type: object
+      properties:
+        idList:
+          type: array
+          items:
+            type: integer
+            format: int64
+
+    AnimalList:
+      type: object
+      properties:
+        total:
+          type: integer
+          example: 23
+        payload:
+          type: array
+          items:
+            $ref: '#/components/schemas/Animal'
+
+    Animal:
+      type: object
+      description: Данные о животном
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Идентификатор животного
+          example: 25
+        name:
+          description: Название животного
+          type: string
+          example: Заяц
+        species:
+          description: Вид животного
+          type: string
+          example: Млекопитающее
+        isCarnivorous:
+          description: Признак хищника
+          type: boolean
+          example: false
+
+    FoodCreate:
+      type: object
+      properties:
+        name:
+          description: Название продукта
+          type: string
+          example: Морковь
+        count:
+          description: Количество продукта
+          type: integer
+          format: int64
+          example: 10
+        unit:
+          description: Единица измерения
+          type: string
+          example: кг
+        type:
+          description: Тип продукта
+          type: string
+          example: овощ
+
+    FoodPut:
+      type: object
+      properties:
+        name:
+          description: Название продукта
+          type: string
+          example: Морковь
+        count:
+          description: Количество продукта
+          type: integer
+          format: int64
+          example: 10
+        unit:
+          description: Единица измерения
+          type: string
+          example: кг
+        type:
+          description: Тип продукта
+          type: string
+          example: овощ
+
+    FoodDeleteRequest:
+      type: object
+      properties:
+        idList:
+          type: array
+          items:
+            type: integer
+            format: int64
+
+    FoodList:
+      type: object
+      properties:
+        total:
+          type: integer
+          example: 23
+        payload:
+          type: array
+          items:
+            $ref: '#/components/schemas/Food'
+
+    Food:
+      type: object
+      description: Данные продукта
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Идентификатор продукта
+          example: 25
+        name:
+          description: Название продукта
+          type: string
+          example: Морковь
+        count:
+          description: Количество продукта
+          type: integer
+          format: int64
+          example: 10
+        unit:
+          description: Единица измерения
+          type: string
+          example: кг
+        type:
+          description: Тип продукта
+          type: string
+          example: овощ
+
+    FeedingCreate:
+      type: object
+      description: Создание новой записи о питании
+      properties:
+        animal_id:
+          type: integer
+          format: int64
+          description: Идентификатор животного
+          example: 25
+        food_id:
+          type: integer
+          format: int64
+          description: Идентификатор продукта
+          example: 12
+        feeding_time:
+          description: Дата кормления
+          type: string
+          example: "2023-05-11"
+        quantity:
+          type: integer
+          format: int64
+          description: Количество продукта
+          example: 12
+
+    FeedingBatch:
+      type: object
+      description: Массовое добавление записей о питании
+      properties:
+        animal_id:
+          type: integer
+          format: int64
+          description: Идентификатор животного
+          example: 21
+        food_info:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeedingItems'
+
+    FeedingItems:
+      type: object
+      properties:
+        food_id:
+          type: integer
+          format: int64
+          description: Идентификатор продукта
+          example: 12
+        feeding_time:
+          description: Дата кормления
+          type: string
+          example: "2023-05-11"
+        quantity:
+          type: integer
+          format: int64
+          description: Количество продукта
+          example: 12
+
+    AnimalFeeding:
+      type: object
+      description: Информация о питании животного
+      properties:
+        animal_id:
+          type: integer
+          format: int64
+          description: Идентификатор животного
+          example: 21
+        food:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnimalFeedingItems'
+
+    AnimalFeedingItems:
+      type: object
+      properties:
+        food_id:
+          type: integer
+          format: int64
+          description: Идентификатор продукта
+          example: 12
+        feeding_time:
+          description: Дата кормления
+          type: string
+          example: "2023-05-11"
+        quantity:
+          type: integer
+          format: int64
+          description: Количество продукта
+          example: 12
+
+    FeedingList:
+      type: object
+      properties:
+        days:
+          type: integer
+          description: Количество дней
+          example: 7
+        food:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeedingListItem'
+
+    FeedingListItem:
+      type: object
+      properties:
+        food_id:
+          type: integer
+          format: int64
+          description: Идентификатор продукта
+          example: 12
+        name:
+          description: Название продукта
+          type: string
+          example: Морковь
+        count_for_days:
+          description: Количество продукта на указанное количество дней
+          type: integer
+          format: int64
+          example: 10
+        count:
+          description: Количество продукта общее
+          type: integer
+          format: int64
+          example: 10
+        missing:
+          description: Количество продукта отсутствующее
+          type: integer
+          format: int64
+          example: 10
+        unit:
+          description: Единица измерения
+          type: string
+          example: кг
+
+    Error:
+      required:
+        - applicationErrorCode
+        - message
+      type: object
+      properties:
+        applicationErrorCode:
+          type: string
+          description: |
+            Код ошибки, к которому привел вызов метода
+          example: ModelValidationException
+        message:
+          type: string
+          description: |
+            Сообщение об ошибке
+          example: >-
+            Ошибка создания элемента. Параметр code не может быть null.
+      description: Описание ошибки для всех методов
